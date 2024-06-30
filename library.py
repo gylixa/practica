@@ -7,9 +7,17 @@ class Person:
         self.days = int(days)
         self.salary = int(salary)
 
-    def __str__(self):
-        return f"Фамилия: {self.fam}\nИмя: {self.name}\nОтчество: {self.surname}\nОтдел: {self.department}\nДней: {self.days}\nЗарплата: {self.salary}"
-
+    def getPerson_forTable(self):
+        w = []
+        print(self.fam+' '+self.name+' '+self.surname)
+        x = self.fam+' '+self.name+' '+self.surname
+        w.append(x)
+        w.append(self.surname)
+        w.append(self.days)
+        w.append(self.salary)
+        print(w)
+        return w
+    
 class Grup:
     def __init__(self):
         self.A = {}
@@ -19,17 +27,24 @@ class Grup:
         s = ''
         for x in range(len(self.A)):  
             if x in self.A: 
-                s += f'Person {x+1}:\n'
+                s += f'Person {x+1}:n'
                 s += str(self.A[x])
-                s += '\n'
+                s += 'n'
         return s
+
+    def appendPerson(self, str_Person):
+        parts = str_Person.strip().split(" ")
+        print("!!!", str_Person) 
+        self.A[self.count] = Person(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5])
+
+        self.count += 1
 
     def read_data_from_file(self, filename):
         self.A = {}
         x = 0
         with open(filename, "r", encoding="utf-8") as file:
             for line in file:
-                if line[-1] == '\n':
+                if line[-1] == 'n':
                     line = line[:-1]
                 parts = line.strip().split(" ")
 
@@ -37,6 +52,7 @@ class Grup:
 
                 x += 1
                 self.count += 1
+
 
 
        
